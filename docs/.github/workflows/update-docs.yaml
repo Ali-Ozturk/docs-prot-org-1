@@ -22,8 +22,7 @@ jobs:
         run: |
           git clone https://github.com/Ali-Ozturk/docs-prot-org-1.git
           while read path; do
-            echo "Copying $path to <another-repo>/"
-            cp $path docs-prot-org-1/docs/
+            cp $path docs-prot-org-1/docs/service-1/
           done < files-to-docs.txt
           cd docs-prot-org-1
           git add .
