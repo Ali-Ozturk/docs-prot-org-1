@@ -2,6 +2,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/files-to-copy.txt'
 
 jobs:
   push_files:
@@ -12,8 +14,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.email "your-email@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "test@test.com"
+          git config --global user.name "Github Workflows"
           git config --global credential.helper store
 
       - name: Copy Files to Another Repository
@@ -21,11 +23,11 @@ jobs:
           PAT: ${{ secrets.PAT }}
         run: |
           git clone https://github.com/Ali-Ozturk/docs-prot-org-1.git
-          cp ./src/README.md docs-prot-org-1/docs/
+          while read path; do
+            cp -r $path docs-prot-org-1/docs/
+          done < files-to-copy.txt
           cd docs-prot-org-1
           git add .
           git commit -m "Update files"
-          git config --local user.email "your-email@example.com"
-          git config --local user.name "Your Name"
           git remote set-url origin "https://$PAT@github.com/Ali-Ozturk/docs-prot-org-1.git"
           git push origin HEAD:main
