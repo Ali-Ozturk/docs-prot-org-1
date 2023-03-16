@@ -1,5 +1,3 @@
-name: Push Files to Org docs Repository
-
 on:
   push:
     branches:
@@ -12,13 +10,22 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Copy Files to Another Repository
+      - name: Configure Git
         run: |
-          git config --global user.email "test@test.com"
-          git config --global user.name "Workflow Test"
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "Your Name"
+          git config --global credential.helper store
+
+      - name: Copy Files to Another Repository
+        env:
+          PAT: ${{ secrets.PAT }}
+        run: |
           git clone https://github.com/Ali-Ozturk/docs-prot-org-1.git
           cp ./src/README.md docs-prot-org-1/docs/
           cd docs-prot-org-1
           git add .
           git commit -m "Update files"
-          git push
+          git config --local user.email "your-email@example.com"
+          git config --local user.name "Your Name"
+          git remote set-url origin "https://$PAT@github.com/Ali-Ozturk/docs-prot-org-1.git"
+          git push origin HEAD:main
