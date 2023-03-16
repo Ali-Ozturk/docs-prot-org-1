@@ -2,8 +2,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '.github/workflows/files-to-copy.txt'
 
 jobs:
   push_files:
