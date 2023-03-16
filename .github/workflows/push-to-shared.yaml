@@ -12,8 +12,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.email "test@test.com"
-          git config --global user.name "Github Workflows"
+          git config --global user.email "aliozturk@outlook.dk"
+          git config --global user.name "Ali-Ozturk"
           git config --global credential.helper store
 
       - name: Copy Files to Another Repository
