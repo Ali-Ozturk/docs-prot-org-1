@@ -14,6 +14,8 @@ jobs:
 
       - name: Copy Files to Another Repository
         run: |
+          git config --global user.email "test@test.com"
+          git config --global user.name "Workflow Test"
           git clone https://github.com/Ali-Ozturk/docs-prot-org-1.git
           cp ./src/README.md docs-prot-org-1/docs/
           cd docs-prot-org-1
