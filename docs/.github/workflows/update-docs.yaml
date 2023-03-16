@@ -25,7 +25,7 @@ jobs:
           git clone https://github.com/Ali-Ozturk/docs-prot-org-1.git
           while read path; do
             cp -r $path docs-prot-org-1/docs/
-          done < files-to-copy.txt
+          done < .github/workflows/files-to-copy.txt
           cd docs-prot-org-1
           git add .
           git commit -m "Update files"
