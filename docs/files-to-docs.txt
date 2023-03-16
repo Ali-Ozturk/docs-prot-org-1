@@ -1,2 +1,3 @@
 ./src/README.md
 ./src/components/api-description.md
+./src/api/how-to-enable-api.md
