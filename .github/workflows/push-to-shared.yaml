@@ -22,7 +22,7 @@ jobs:
         run: |
           git clone https://github.com/Ali-Ozturk/docs-prot-shared-cos.git
           target_dir=docs-prot-shared-cos/docs
-          cp ./docs/. $target_dir/
+          cp -R ./docs/. $target_dir/
           cd docs-prot-shared-cos
           git add .
           git commit -m "Update files"
