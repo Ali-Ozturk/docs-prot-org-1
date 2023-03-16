@@ -23,6 +23,7 @@ jobs:
           git clone https://github.com/Ali-Ozturk/docs-prot-org-1.git
           while read path; do
             target_dir=docs-prot-org-1/docs/service-1
+            rm -rf $target_dir
             mkdir -p $target_dir  # create the directory if it doesn't exist
             cp $path $target_dir/
           done < files-to-docs.txt
