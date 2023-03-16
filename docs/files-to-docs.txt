@@ -1,2 +1,2 @@
-src/README.md
+./src/README.md
 ./src/components/components-description.md
