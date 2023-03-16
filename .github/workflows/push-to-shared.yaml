@@ -26,5 +26,5 @@ jobs:
           cd docs-prot-shared-cos
           git add .
           git commit -m "Update files"
-          git remote set-url origin "https://github.com/Ali-Ozturk/docs-prot-shared-cos.git"
+          git remote set-url origin "https://$PAT@github.com/Ali-Ozturk/docs-prot-shared-cos.git"
           git push origin HEAD:main
