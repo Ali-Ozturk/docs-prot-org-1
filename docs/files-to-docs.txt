@@ -8,4 +8,4 @@ src/azure-functions.md
 src/components/==>test/
 src/api/==>test/
 src/==>test/
-azure-functions.md==>azure-functions.md
+azure-functions.md==>test-functions.md
