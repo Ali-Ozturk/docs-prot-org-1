@@ -5,7 +5,7 @@ src/kubernetes.md
 src/azure-functions.md
 
 # Renaming paths
+src/azure-functions.md==>test-functions.md
 src/components/==>test/
 src/api/==>test/
 src/==>test/
-src/azure-functions.md==>test-functions.md
