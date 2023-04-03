@@ -23,14 +23,13 @@ jobs:
           cd service-1-files
           git checkout -b api-service-branch
           git pull origin main
-          cat files-to-docs.txt
-          ls
-          pwd
           while read file; do
             git checkout main -- "$file"
             mkdir -p "../docs/testing/$(dirname "$file")"
             cp "$file" "../docs/testing/" 
           done < files-to-docs.txt
+          pwd
+          ls
           git add .
           git commit -m "Merge files from API Service Repository"
           cd ..
