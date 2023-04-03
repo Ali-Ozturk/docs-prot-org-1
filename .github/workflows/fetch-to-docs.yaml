@@ -27,12 +27,8 @@ jobs:
             git checkout main -- "$file"
             mkdir -p "../docs/testing/$(dirname "$file")"
             cp "$file" "../docs/testing/" 
+            git add "../docs/testing/$file"
           done < files-to-docs.txt
-          git status
-          cd ..
-          pwd
-          ls
-          git add .
           git commit -m "Merge files from API Service Repository"
           cd ..
           git merge --no-ff --no-edit api-service-branch
