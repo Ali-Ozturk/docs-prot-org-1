@@ -30,7 +30,6 @@ jobs:
           path: service
       - uses: actions/checkout@v3
       - name: Setup tmate session
-        if: ${{ failure() }}
         uses: mxschmitt/action-tmate@v3
       - name: Merge specific files from service repository into docs repository
         run: |
