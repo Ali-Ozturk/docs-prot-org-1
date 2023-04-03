@@ -22,7 +22,7 @@ jobs:
             git checkout main -- "$file"
             cp "$file" "../docs/testing/$file"
             git add "../docs/testing/$file"
-          done < files-to-push.txt
+          done < files-to-docs.txt
           git commit -m "Merge files from API Service Repository"
           cd ..
           git merge --no-ff --no-edit api-service-branch
@@ -41,7 +41,7 @@ jobs:
             git checkout main -- "$file"
             cp "$file" "../docs/testing/$file"
             git add "../docs/testing/$file"
-          done < files-to-push.txt
+          done < files-to-docs.txt
           git commit -m "Merge files from Client Service Repository"
           cd ..
           git merge --no-ff --no-edit client-service-branch
