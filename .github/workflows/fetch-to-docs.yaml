@@ -16,8 +16,6 @@ jobs:
           git config --global credential.helper store
       - name: Checkout docs repository
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Install git-filter-repo
         run: |
           sudo apt-get update
