@@ -22,6 +22,7 @@ jobs:
         run: |
           cd service-1-files
           git checkout -b api-service-branch
+          git status
           git pull origin main
           while read file; do
             git checkout main -- "$file"
