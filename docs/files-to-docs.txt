@@ -1,0 +1,4 @@
+src/components/api-description.md==>api/api-description.md
+src/api/how-to-enable-api.md==>api/enabling.md
+src/kubernetes.md==>kubernetes/index.md
+src/azure-functions.md==>kubernetes/azure-functions.md
