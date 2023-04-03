@@ -20,7 +20,8 @@ jobs:
           git pull origin main
           while read file; do
             git checkout main -- "$file"
-            cp "$file" "../docs/testing/"
+            mkdir -p "../docs/testing/$(dirname "$file")"
+            cp "$file" "../docs/testing/" 
           done < files-to-docs.txt
           git add .
           git commit -m "Merge files from API Service Repository"
