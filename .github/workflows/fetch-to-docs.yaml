@@ -23,6 +23,9 @@ jobs:
           cd service-1-files
           git checkout -b api-service-branch
           git pull origin main
+          cat files-to-docs.txt
+          ls
+          pwd
           while read file; do
             git checkout main -- "$file"
             mkdir -p "../docs/testing/$(dirname "$file")"
@@ -43,9 +46,6 @@ jobs:
           cd client-service-files
           git checkout -b client-service-branch
           git pull origin main
-          cat files-to-docs.txt
-          ls
-          pwd
           while read file; do
             git checkout main -- "$file"
             cp "$file" "../docs/testing/$file"
