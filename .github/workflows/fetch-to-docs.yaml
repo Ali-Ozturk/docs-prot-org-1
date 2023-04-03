@@ -30,7 +30,7 @@ jobs:
         run: |
           cd service
           git checkout -b merge-branch
-          git filter-repo --paths-from-file ./files-to-docs.txt --to-subdirectory-filter $GITHUB_WORKSPACE/docs --force
+          git filter-repo --paths-from-file ./files-to-docs.txt --to-subdirectory-filter ../docs --force
           cd $GITHUB_WORKSPACE
           git remote add service $GITHUB_WORKSPACE/service
           git fetch service
