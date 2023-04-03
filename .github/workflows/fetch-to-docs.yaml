@@ -25,12 +25,12 @@ jobs:
           git pull origin main
           while read file; do
             git checkout main -- "$file"
-            mkdir -p "../docs/testing/$(dirname "$file")"
-            cp "$file" "../docs/testing/" 
-            git add "../docs/testing/$file"
+            mkdir -p "$GITHUB_WORKSPACE/docs/testing/$(dirname "$file")"
+            cp "$file" "$GITHUB_WORKSPACE/docs/testing/" 
+            git add "$file"
           done < files-to-docs.txt
           git commit -m "Merge files from API Service Repository"
-          cd ..
+          cd $GITHUB_WORKSPACE
           git merge --no-ff --no-edit api-service-branch
       - name: Fetch files from Client Service Repository
         uses: actions/checkout@v2
