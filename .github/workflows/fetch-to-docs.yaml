@@ -28,6 +28,8 @@ jobs:
             mkdir -p "../docs/testing/$(dirname "$file")"
             cp "$file" "../docs/testing/" 
           done < files-to-docs.txt
+          cd ..
+          git status
           pwd
           ls
           git add .
