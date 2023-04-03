@@ -31,7 +31,7 @@ jobs:
           git checkout -b merge-branch
           git filter-repo --paths-from-file ./files-to-docs.txt --force
           cd ../docs
-          git remote add service ../service
+          git remote add service $GITHUB_WORKSPACE/service
           git fetch service
           git merge --allow-unrelated-histories service/merge-branch
           git push origin main
