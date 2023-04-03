@@ -6,6 +6,8 @@ on:
 jobs:
   fetch-files:
     runs-on: ubuntu-latest
+    env:
+      FOLDER_NAME: "docs"
     steps:
       - name: Configure Git
         run: |
@@ -14,6 +16,8 @@ jobs:
           git config --global credential.helper store
       - name: Checkout docs repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Install git-filter-repo
         run: |
           sudo apt-get update
@@ -22,6 +26,7 @@ jobs:
       - name: Checkout service repository
         uses: actions/checkout@v2
         with:
+          fetch-depth: 0
           repository: ali-ozturk/docs-prot-service-1
           ref: main
           token: ${{ secrets.PAT }}
@@ -30,7 +35,7 @@ jobs:
         run: |
           cd service
           git checkout -b merge-branch
-          git filter-repo --paths-from-file ./files-to-docs.txt --to-subdirectory-filter ../docs --force
+          git filter-repo --paths-from-file ./files-to-docs.txt --to-subdirectory-filter $FOLDER_NAME --force
           cd $GITHUB_WORKSPACE
           git remote add service $GITHUB_WORKSPACE/service
           git fetch service
