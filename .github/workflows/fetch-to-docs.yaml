@@ -32,7 +32,7 @@ jobs:
         run: |
           cd service
           git checkout -b merge-branch
-          git filter-repo --paths-from-file ./files-to-docs.txt --to-subdirectory-filter $FOLDER_NAME --path-rename ""=$FOLDER_NAME/ --force
+          git filter-repo --paths-from-file ./files-to-docs.txt --to-subdirectory-filter $FOLDER_NAME --path-rename "":$FOLDER_NAME/ --force
           cd $GITHUB_WORKSPACE
           git remote add service $GITHUB_WORKSPACE/service
           git fetch service
