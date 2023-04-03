@@ -19,7 +19,21 @@ jobs:
           ref: main
           path: service-1-files
       - name: Merge API Service files
-        uses: mxschmitt/action-tmate@v3
+        run: |
+          cd service-1-files
+          git checkout -b api-service-branch
+          git pull origin main
+          while read file; do
+            git checkout main -- "$file"
+            mkdir -p "../docs/testing/$(dirname "$file")"
+            cp "$file" "../docs/testing/" 
+          done < files-to-docs.txt
+          git status
+          git add .
+          git commit -m "Merge files from API Service Repository"
+          git status
+          cd ..
+          git merge --no-ff --no-edit api-service-branch
       - name: Fetch files from Client Service Repository
         uses: actions/checkout@v2
         with:
