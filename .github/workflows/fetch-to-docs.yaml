@@ -7,9 +7,6 @@ jobs:
   fetch-files:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - name: Fetch files from API Service Repository
         uses: actions/checkout@v2
         with:
@@ -55,3 +52,7 @@ jobs:
           git add "./docs/testing"
           git diff-index --quiet HEAD || git commit -m "Merge files from service repositories"
           git push
+      - uses: actions/checkout@v3
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
