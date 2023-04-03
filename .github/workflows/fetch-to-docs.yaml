@@ -9,10 +9,10 @@ jobs:
     env:
       FOLDER_NAME: "docs"
     steps:
-      - name: Configure Git
+      - name: Configure Git as Github Actions
         run: |
-          git config --global user.email "test@test.com"
-          git config --global user.name "Github Workflows"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git config --global credential.helper store
       - name: Checkout docs repository
         uses: actions/checkout@v2
@@ -27,7 +27,6 @@ jobs:
           fetch-depth: 0
           repository: ali-ozturk/docs-prot-service-1
           ref: main
-          token: ${{ secrets.PAT }}
           path: service
       - name: Merge specific files from service repository into docs repository
         run: |
