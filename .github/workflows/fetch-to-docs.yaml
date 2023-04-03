@@ -24,10 +24,10 @@ jobs:
         with:
           repository: ali-ozturk/docs-prot-service-1
           ref: main
-          path: service
+          path: ../service
       - name: Merge specific files from service repository into docs repository
         run: |
-          cd service
+          cd ../service
           git checkout -b merge-branch
           git filter-repo --paths-from-file ./files-to-docs.txt --force
           cd ../docs
