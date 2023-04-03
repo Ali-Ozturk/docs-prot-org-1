@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - deprecated
 
 jobs:
   push_files:

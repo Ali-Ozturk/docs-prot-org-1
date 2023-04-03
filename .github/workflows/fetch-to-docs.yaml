@@ -1,0 +1,54 @@
+name: Fetch files from service repositories
+on:
+  push:
+    branches:
+      - main
+jobs:
+  fetch-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch files from API Service Repository
+        uses: actions/checkout@v2
+        with:
+          repository: ali-ozturk/docs-prot-service-1
+          ref: main
+          path: service-1-files
+      - name: Merge API Service files
+        run: |
+          cd service-1-files
+          git checkout -b api-service-branch
+          git pull origin main
+          while read file; do
+            git checkout main -- "$file"
+            cp "$file" "../docs/testing/$file"
+            git add "../docs/testing/$file"
+          done < files-to-push.txt
+          git commit -m "Merge files from API Service Repository"
+          cd ..
+          git merge --no-ff --no-edit api-service-branch
+      - name: Fetch files from Client Service Repository
+        uses: actions/checkout@v2
+        with:
+          repository: ali-ozturk/docs-prot-service-2
+          ref: main
+          path: client-service-files
+      - name: Merge Client Service files
+        run: |
+          cd client-service-files
+          git checkout -b client-service-branch
+          git pull origin main
+          while read file; do
+            git checkout main -- "$file"
+            cp "$file" "../docs/testing/$file"
+            git add "../docs/testing/$file"
+          done < files-to-push.txt
+          git commit -m "Merge files from Client Service Repository"
+          cd ..
+          git merge --no-ff --no-edit client-service-branch
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          git add "./docs/testing"
+          git diff-index --quiet HEAD || git commit -m "Merge files from service repositories"
+          git push
