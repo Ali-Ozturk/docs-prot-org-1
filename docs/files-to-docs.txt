@@ -1,4 +1,9 @@
-src/components/api-description.md==>api/api-description.md
-src/api/how-to-enable-api.md==>api/enabling.md
-src/kubernetes.md==>kubernetes/index.md
-src/azure-functions.md==>kubernetes/azure-functions.md
+src/components/api-description.md
+src/api/how-to-enable-api.md
+src/kubernetes.md
+src/azure-functions.md
+
+# Renaming paths
+src/components/=>test/
+src/api/=>test/
+src/=>test/
