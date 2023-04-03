@@ -52,3 +52,5 @@ jobs:
           git add "./docs/testing"
           git diff-index --quiet HEAD || git commit -m "Merge files from service repositories"
           git push
+      - name: Setup tmate session
+          uses: mxschmitt/action-tmate@v3
