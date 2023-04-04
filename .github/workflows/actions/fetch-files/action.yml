@@ -36,3 +36,6 @@ steps:
       git fetch ${{ inputs.path }}
       git merge --allow-unrelated-histories ${{ inputs.path }}/temp-merge-branch
       git push origin $MAIN_BRANCH
+
+  - name: Checkout docs repository
+    uses: actions/checkout@v2
