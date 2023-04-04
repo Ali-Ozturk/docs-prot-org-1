@@ -1,4 +1,5 @@
 name: fetch-files
+description: This is a reusable job template for fetching files from other repositories
 
 # Define the inputs for the job
 inputs:
@@ -15,7 +16,6 @@ inputs:
     default: "0"
 
 # Define the steps for the job
-description: This is a reusable job template for fetching files from other repositories
 runs:
   using: "composite"
   steps:
@@ -27,7 +27,7 @@ runs:
         ref: ${{ inputs.ref }}
         path: ${{ inputs.path }}
     - name: Merge specific files from service repository into docs repository
-      shell: ""
+      shell: bash
       run: |
         cd ${{ inputs.path }}
         git checkout -b temp-merge-branch
