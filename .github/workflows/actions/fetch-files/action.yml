@@ -19,6 +19,8 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout docs repository
+      uses: actions/checkout@v2
     - name: Checkout service repository
       uses: actions/checkout@v2
       with:
@@ -37,3 +39,5 @@ runs:
         git fetch ${{ inputs.path }}
         git merge --allow-unrelated-histories ${{ inputs.path }}/temp-merge-branch
         git push origin $MAIN_BRANCH
+    - name: Checkout docs repository
+      uses: actions/checkout@v2
