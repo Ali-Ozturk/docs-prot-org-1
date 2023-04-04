@@ -1,4 +1,4 @@
-# This is a reusable job template for fetching files from other repositories
+name: fetch-files
 
 # Define the inputs for the job
 inputs:
@@ -12,30 +12,28 @@ inputs:
     description: 'The path to the directory to check out the repository into'
   fetch-depth:
     description: 'This option determine whether or not to retrieve commit history. Value 0 = retrieve'
-    default: 0
+    default: "0"
 
 # Define the steps for the job
-steps:
-  # Fetch the files from the service repository
-  - name: Checkout service repository
-    uses: actions/checkout@v2
-    with:
-      fetch-depth: ${{ inputs.fetch-depth }}
-      repository: ${{ inputs.repository }}
-      ref: ${{ inputs.ref }}
-      path: ${{ inputs.path }}
-
-  # Merge the files into the docs repository
-  - name: Merge specific files from service repository into docs repository
-    run: |
-      cd ${{ inputs.path }}
-      git checkout -b temp-merge-branch
-      git filter-repo --paths-from-file ./docs-config.txt --to-subdirectory-filter "docs" --force
-      cd $GITHUB_WORKSPACE
-      git remote add service $GITHUB_WORKSPACE/${{ inputs.path }}
-      git fetch ${{ inputs.path }}
-      git merge --allow-unrelated-histories ${{ inputs.path }}/temp-merge-branch
-      git push origin $MAIN_BRANCH
-
-  - name: Checkout docs repository
-    uses: actions/checkout@v2
+description: This is a reusable job template for fetching files from other repositories
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout service repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: ${{ inputs.fetch-depth }}
+        repository: ${{ inputs.repository }}
+        ref: ${{ inputs.ref }}
+        path: ${{ inputs.path }}
+    - name: Merge specific files from service repository into docs repository
+      shell: ""
+      run: |
+        cd ${{ inputs.path }}
+        git checkout -b temp-merge-branch
+        git filter-repo --paths-from-file ./docs-config.txt --to-subdirectory-filter "docs" --force
+        cd $GITHUB_WORKSPACE
+        git remote add service $GITHUB_WORKSPACE/${{ inputs.path }}
+        git fetch ${{ inputs.path }}
+        git merge --allow-unrelated-histories ${{ inputs.path }}/temp-merge-branch
+        git push origin $MAIN_BRANCH
