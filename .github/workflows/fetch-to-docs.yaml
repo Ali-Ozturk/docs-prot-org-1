@@ -7,7 +7,7 @@ jobs:
   fetch-files:
     runs-on: ubuntu-latest
     env:
-      FOLDER_NAME: "docs"
+      MAIN_BRANCH: "main"
     steps:
       - name: Configure Git as Github Actions
         run: |
@@ -21,23 +21,13 @@ jobs:
         with:
           python-version: '3.9'
       - run: pip install git-filter-repo==2.38.0
-      - name: Checkout service repository
-        uses: actions/checkout@v2
+      - name: Fetch files from Service 1 Repository
+        uses: ".github/workflows/templates/fetch-files-template.yml"
         with:
           fetch-depth: 0
           repository: ali-ozturk/docs-prot-service-1
           ref: main
           path: service
-      - name: Merge specific files from service repository into docs repository
-        run: |
-          cd service
-          git checkout -b merge-branch
-          git filter-repo --paths-from-file ./docs-config.txt --to-subdirectory-filter $FOLDER_NAME --force
-          cd $GITHUB_WORKSPACE
-          git remote add service $GITHUB_WORKSPACE/service
-          git fetch service
-          git merge --allow-unrelated-histories service/merge-branch
-          git push origin main
       - uses: actions/checkout@v3
       - name: Setup tmate session
         if: ${{ failure() }}
