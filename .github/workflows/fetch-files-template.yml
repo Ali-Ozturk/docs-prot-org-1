@@ -16,6 +16,9 @@ inputs:
 
 # Define the steps for the job
 steps:
+  - name: Checkout docs repository
+    uses: actions/checkout@v2
+
   # Fetch the files from the service repository
   - name: Checkout service repository
     uses: actions/checkout@v2
