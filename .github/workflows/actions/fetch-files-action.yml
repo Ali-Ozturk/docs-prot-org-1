@@ -1,0 +1,41 @@
+# This is a reusable job template for fetching files from other repositories
+
+# Define the inputs for the job
+inputs:
+  repository:
+    description: 'The URL of the service repository to fetch files from'
+    required: true
+  ref:
+    description: 'The Git ref (branch, tag, or commit SHA) to check out'
+    required: true
+  path:
+    description: 'The path to the directory to check out the repository into'
+  fetch-depth:
+    description: 'This option determine whether or not to retrieve commit history. Value 0 = retrieve'
+    default: 0
+
+# Define the steps for the job
+steps:
+  - name: Checkout docs repository
+    uses: actions/checkout@v2
+
+  # Fetch the files from the service repository
+  - name: Checkout service repository
+    uses: actions/checkout@v2
+    with:
+      fetch-depth: ${{ inputs.fetch-depth }}
+      repository: ${{ inputs.repository }}
+      ref: ${{ inputs.ref }}
+      path: ${{ inputs.path }}
+
+  # Merge the files into the docs repository
+  - name: Merge specific files from service repository into docs repository
+    run: |
+      cd ${{ inputs.path }}
+      git checkout -b temp-merge-branch
+      git filter-repo --paths-from-file ./docs-config.txt --to-subdirectory-filter "docs" --force
+      cd $GITHUB_WORKSPACE
+      git remote add service $GITHUB_WORKSPACE/${{ inputs.path }}
+      git fetch ${{ inputs.path }}
+      git merge --allow-unrelated-histories ${{ inputs.path }}/temp-merge-branch
+      git push origin $MAIN_BRANCH
