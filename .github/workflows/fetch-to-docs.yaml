@@ -22,7 +22,7 @@ jobs:
           python-version: '3.9'
       - run: pip install git-filter-repo==2.38.0
       - name: Fetch files from Service 1 Repository
-        uses: ".github/workflows/templates/fetch-files-template.yml"
+        uses: .github/workflows/templates/fetch-files-template.yml
         with:
           fetch-depth: 0
           repository: ali-ozturk/docs-prot-service-1
