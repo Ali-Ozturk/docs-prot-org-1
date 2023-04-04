@@ -24,7 +24,7 @@ jobs:
       - name: Checkout docs repository
         uses: actions/checkout@v2
       - name: Fetch files from Service 1 Repository
-        uses: ./.github/actions/fetch-files
+        uses: ./.github/workflows/actions/fetch-files
         with:
           fetch-depth: 0
           repository: ali-ozturk/docs-prot-service-1
