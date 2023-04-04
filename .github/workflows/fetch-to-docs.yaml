@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - main
+
+env:
+  MAIN_BRANCH: "main"
+
 jobs:
-  fetch-files:
+  fetch-service-1:
     runs-on: ubuntu-latest
-    env:
-      MAIN_BRANCH: "main"
     steps:
       - name: Configure Git as Github Actions
         run: |
@@ -28,7 +30,3 @@ jobs:
           repository: ali-ozturk/docs-prot-service-1
           ref: main
           path: service
-      - uses: actions/checkout@v3
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
