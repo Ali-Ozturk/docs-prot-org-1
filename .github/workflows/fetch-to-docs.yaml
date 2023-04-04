@@ -31,3 +31,6 @@ jobs:
           repository: ali-ozturk/docs-prot-service-1
           ref: main
           path: service
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
