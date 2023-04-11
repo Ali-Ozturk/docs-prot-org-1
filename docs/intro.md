@@ -1,4 +1,19 @@
+---
+customVar: foo
+---
+
+import Testing from '@site/src/components/Testing';
+
+
 # Tutorial Intro
+
+<Testing>Docusaurus green</Testing>
+
+<ul>
+  {Object.entries(frontMatter).map(([key, value]) => <li key={key}><b>{key}</b>: {value}</li>)}
+  {frontMatter['customVar']}
+</ul>
+
 
 Let's discover **Docusaurus in less than 5 minutes**.
 
